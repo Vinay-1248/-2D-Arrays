@@ -1,0 +1,58 @@
+import java.util.Arrays;
+
+public class MatrixTransposer {
+    
+    public int[][] transpose(int[][] matrix) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        
+        // Create a new matrix with swapped dimensions
+        int[][] transposed = new int[cols][rows];
+        
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                // The row index becomes the column index, and vice versa
+                transposed[j][i] = matrix[i][j];
+            }
+        }
+        
+        return transposed;
+    }
+
+    public static void main(String[] args) {
+        MatrixTransposer transposer = new MatrixTransposer();
+        
+        // Test case 1: Square matrix
+        int[][] matrix1 = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+        int[][] result1 = transposer.transpose(matrix1);
+        System.out.println("Transposed Matrix 1:");
+        for (int[] row : result1) {
+            System.out.println(Arrays.toString(row));
+        }
+        // Output: 
+        // [1, 4, 7]
+        // [2, 5, 8]
+        // [3, 6, 9]
+        
+        System.out.println("---");
+        
+        // Test case 2: Rectangle matrix (2x3)
+        int[][] matrix2 = {
+            {1, 2, 3},
+            {4, 5, 6}
+        };
+        int[][] result2 = transposer.transpose(matrix2);
+        System.out.println("Transposed Matrix 2:");
+        for (int[] row : result2) {
+            System.out.println(Arrays.toString(row));
+        }
+        // Output:
+        // [1, 4]
+        // [2, 5]
+        // [3, 6]
+    }
+}
