@@ -1,0 +1,62 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class LuckyNumberFinder {
+    
+    public List<Integer> luckyNumbers (int[][] matrix) {
+        List<Integer> result = new ArrayList<>();
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        
+        for (int i = 0; i < rows; i++) {
+            // Step 1 & 2: Find the minimum value in the current row
+            int minVal = matrix[i][0];
+            int minColIndex = 0;
+            
+            for (int j = 1; j < cols; j++) {
+                if (matrix[i][j] < minVal) {
+                    minVal = matrix[i][j];
+                    minColIndex = j;
+                }
+            }
+            
+            // Step 3: Check if minVal is the maximum in its column
+            boolean isLucky = true;
+            for (int k = 0; k < rows; k++) {
+                if (matrix[k][minColIndex] > minVal) {
+                    isLucky = false; // Found a larger number, not lucky
+                    break;
+                }
+            }
+            
+            // Step 4: If it's still lucky, add it to the result
+            if (isLucky) {
+                result.add(minVal);
+            }
+        }
+        
+        return result;
+    }
+
+    public static void main(String[] args) {
+        LuckyNumberFinder finder = new LuckyNumberFinder();
+        
+        // Test case 1
+        int[][] matrix1 = {
+            {3, 7, 8},
+            {9, 11, 13},
+            {15, 16, 17}
+        };
+        System.out.println("Lucky numbers: " + finder.luckyNumbers(matrix1)); 
+        // Output: [15] (15 is the min in row 2, and max in col 0)
+        
+        // Test case 2
+        int[][] matrix2 = {
+            {1, 10, 4, 2},
+            {9, 3, 8, 7},
+            {15, 16, 17, 12}
+        };
+        System.out.println("Lucky numbers: " + finder.luckyNumbers(matrix2)); 
+        // Output: [12] (12 is the min in row 2, and max in col 3)
+    }
+}
