@@ -1,0 +1,42 @@
+public class MatrixDiagonalSummer {
+    
+    public int diagonalSum(int[][] mat) {
+        int n = mat.length;
+        int sum = 0;
+        
+        for (int i = 0; i < n; i++) {
+            // Add the primary diagonal element
+            sum += mat[i][i];
+            
+            // Add the secondary diagonal element, provided it's not the exact center
+            if (i != n - 1 - i) {
+                sum += mat[i][n - 1 - i];
+            }
+        }
+        
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        MatrixDiagonalSummer summer = new MatrixDiagonalSummer();
+        
+        // Test case 1: Odd length (3x3)
+        int[][] matrix1 = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+        System.out.println("Diagonal Sum (3x3): " + summer.diagonalSum(matrix1)); 
+        // Output: 25 (1 + 5 + 9 + 3 + 7 = 25)
+        
+        // Test case 2: Even length (4x4)
+        int[][] matrix2 = {
+            {1, 1, 1, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1},
+            {1, 1, 1, 1}
+        };
+        System.out.println("Diagonal Sum (4x4): " + summer.diagonalSum(matrix2)); 
+        // Output: 8
+    }
+}
