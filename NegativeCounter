@@ -1,0 +1,38 @@
+
+
+
+public class NegativeCounter {
+    
+    public int countNegatives(int[][] grid) {
+        int count = 0;
+        int cols = grid[0].length;
+        
+        // Simple nested loops
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (grid[i][j] < 0) {
+                    // Since it's sorted descending, everything from j to the end is negative
+                    count += (cols - j);
+                    break; // Move to the next row
+                }
+            }
+        }
+        
+        return count;
+    }
+
+    public static void main(String[] args) {
+        NegativeCounter counter = new NegativeCounter();
+        
+        // Test case
+        int[][] grid = {
+            {4, 3, 2, -1},
+            {3, 2, 1, -1},
+            {1, 1, -1, -2},
+            {-1, -1, -2, -3}
+        };
+        
+        System.out.println("Negative numbers count: " + counter.countNegatives(grid)); 
+        // Output: 8
+    }
+}
